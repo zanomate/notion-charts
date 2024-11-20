@@ -7,15 +7,22 @@ const notion = new Client({
 })
 
 export default async (req: Request) => {
-  const args = await req.json()
-  const allResults: QueryDatabaseResponse['results'] = []
-  // @ts-ignore
-  for await (const result of iteratePaginatedAPI<DatabaseArgs, DB_ITEM>(notion.databases.query, args)) {
-    allResults.push(result)
+  try {
+    const args = await req.json()
+    const allResults: QueryDatabaseResponse['results'] = []
+    // @ts-ignore
+    for await (const result of iteratePaginatedAPI<DatabaseArgs, DB_ITEM>(notion.databases.query, args)) {
+      allResults.push(result)
+    }
+    return new Response(JSON.stringify(allResults), {
+      status: 200,
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+  } catch (error) {
+    return new Response('Error', {
+      status: 500,
+    })
   }
-  return new Response(JSON.stringify(allResults), {
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
 }

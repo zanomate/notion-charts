@@ -10,6 +10,7 @@ export const useDatabase = <CHART_ITEM>(
     queryKey: [id, JSON.stringify(args)],
     queryFn: () =>
       fetch('/.netlify/functions/getDatabase', {
+        method: 'POST',
         body: JSON.stringify({
           database_id: id,
           ...args,
