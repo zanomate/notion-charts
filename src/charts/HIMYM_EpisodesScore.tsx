@@ -1,5 +1,5 @@
 import { Bar, BarChart, CartesianGrid, Label, LabelList, Legend, XAxis, YAxis } from 'recharts'
-import { useDatabase } from '../config/notion.ts'
+import { useDatabase } from '../utils/useDatabase.ts'
 import { Score } from '../types/Score.ts'
 import { labelFormatter } from '../utils/recharts.ts'
 

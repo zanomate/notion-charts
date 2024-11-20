@@ -8,6 +8,7 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
+    "@netlify/functions": "^2.8.2",
     "@notionhq/client": "^2.2.15",
     "@tanstack/react-query": "^5.60.6",
     "react": "^18.3.1",
