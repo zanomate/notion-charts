@@ -8,7 +8,7 @@ export const useDatabase = <CHART_ITEM>(
 ) => {
   return useQuery({
     queryKey: [id, JSON.stringify(args)],
-    queryFn: async () =>
+    queryFn: () =>
       fetch('/.netlify/functions/getDatabase', {
         body: JSON.stringify({
           database_id: id,
