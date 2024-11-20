@@ -3,7 +3,8 @@ import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 import { useQuery, UseQueryOptions } from '@tanstack/react-query'
 
 export const notion = new Client({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.notion.com/v1/databases',
+  // baseUrl: 'http://localhost:3000',
   auth: process.env.PUBLIC_NOTION_TOKEN,
 })
 
