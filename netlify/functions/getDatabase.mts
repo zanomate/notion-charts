@@ -21,7 +21,7 @@ export default async (req: Request) => {
       },
     })
   } catch (error) {
-    return new Response('Error', {
+    return new Response(JSON.stringify(error), {
       status: 500,
     })
   }
