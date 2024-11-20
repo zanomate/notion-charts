@@ -1,0 +1,27 @@
+{
+  "name": "notion-znmt-charts",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "rsbuild dev --open",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "@tanstack/react-query": "^5.60.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-flex-element": "^2.0.10",
+    "react-router-dom": "^6.28.0",
+    "recharts": "^2.13.3"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.0.19",
+    "@rsbuild/plugin-react": "^1.0.6",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3"
+  }
+}
