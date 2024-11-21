@@ -1,7 +1,8 @@
 import { Bar, BarChart, CartesianGrid, Label, LabelList, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts'
-import { useDatabase } from '../utils/useDatabase.ts'
+import { Loader } from '../components/Loader.tsx'
 import { Score } from '../types/Score.ts'
 import { labelFormatter } from '../utils/recharts.ts'
+import { useDatabase } from '../utils/useDatabase.ts'
 
 interface ChartItem {
   season: number
@@ -43,7 +44,7 @@ export const HIMYM_EpisodesScore = () => {
     },
   )
 
-  if (isFetching) return <div>Loading...</div>
+  if (isFetching) return <Loader />
 
   return (
     <ResponsiveContainer width="100%" height="100%" style={{ overflow: 'hidden' }}>
