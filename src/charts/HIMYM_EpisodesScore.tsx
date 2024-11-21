@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, Label, LabelList, Legend, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, Label, LabelList, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 import { useDatabase } from '../utils/useDatabase.ts'
 import { Score } from '../types/Score.ts'
 import { labelFormatter } from '../utils/recharts.ts'
@@ -46,27 +46,29 @@ export const HIMYM_EpisodesScore = () => {
   if (isFetching) return <div>Loading...</div>
 
   return (
-    <BarChart width={700} height={500} barSize={50} data={data}>
-      <Legend verticalAlign="top" height={36} />
-      <CartesianGrid />
-      <XAxis dataKey="season">
-        <Label value="Seasons" offset={-5} position="insideBottom" />
-      </XAxis>
-      <YAxis ticks={[24]}>
-        <Label value="Episodes" offset={10} position="middle" angle={-90} />
-      </YAxis>
-      <Bar dataKey="awesome" stackId="a" fill="#1ea853">
-        <LabelList dataKey="awesome" position="inside" fill="white" formatter={labelFormatter} />
-      </Bar>
-      <Bar dataKey="great" stackId="a" fill="#2ee067">
-        <LabelList dataKey="great" position="inside" fill="white" formatter={labelFormatter} />
-      </Bar>
-      <Bar dataKey="ok" stackId="a" fill="#ddd20e">
-        <LabelList dataKey="ok" position="inside" fill="white" formatter={labelFormatter} />
-      </Bar>
-      <Bar dataKey="bad" stackId="a" fill="#fa727c">
-        <LabelList dataKey="bad" position="inside" fill="white" formatter={labelFormatter} />
-      </Bar>
-    </BarChart>
+    <ResponsiveContainer width="100%" height="100%" style={{ overflow: 'hidden' }}>
+      <BarChart barSize={48} margin={{ top: 48, left: 48, right: 48, bottom: 48 }} data={data}>
+        <Legend verticalAlign="top" height={36} />
+        <CartesianGrid />
+        <XAxis dataKey="season">
+          <Label value="Seasons" offset={-5} position="insideBottom" />
+        </XAxis>
+        <YAxis ticks={[24]}>
+          <Label value="Episodes" offset={10} position="middle" angle={-90} />
+        </YAxis>
+        <Bar dataKey="awesome" stackId="a" fill="#1ea853">
+          <LabelList dataKey="awesome" position="inside" fill="white" formatter={labelFormatter} />
+        </Bar>
+        <Bar dataKey="great" stackId="a" fill="#2ee067">
+          <LabelList dataKey="great" position="inside" fill="white" formatter={labelFormatter} />
+        </Bar>
+        <Bar dataKey="ok" stackId="a" fill="#ddd20e">
+          <LabelList dataKey="ok" position="inside" fill="white" formatter={labelFormatter} />
+        </Bar>
+        <Bar dataKey="bad" stackId="a" fill="#fa727c">
+          <LabelList dataKey="bad" position="inside" fill="white" formatter={labelFormatter} />
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
   )
 }
