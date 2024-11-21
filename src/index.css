@@ -11,3 +11,11 @@ html, body {
   align-items: center;
   height: 100vh;
 }
+
+:root {
+  --primary-color: #373530;
+}
+
+[data-theme="dark"] {
+  --primary-color: #191919;
+}
