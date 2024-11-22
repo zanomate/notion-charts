@@ -59,18 +59,15 @@ export const Migrane_Attacks = () => {
     <ResponsiveContainer width="100%" height="100%" style={{ overflow: 'hidden' }}>
       <ComposedChart margin={{ top: 48, left: 48, right: 48, bottom: 48 }} data={data}>
         <Legend verticalAlign="top" height={36} />
-        <CartesianGrid />
+        <CartesianGrid vertical={false} />
         <XAxis dataKey="month" tickFormatter={(val) => moment(val, 'YYYY-MM').format('MMM YY')} />
-        <YAxis ticks={[5, 10, 15]}>
+        <YAxis>
           <Label value="Attacks and Drugs" offset={10} position="middle" angle={-90} />
         </YAxis>
         <Bar dataKey="attacks" fill={palette.text.disabled}>
-          <LabelList dataKey="attacks" position="insideTop" offset={10} fill={palette.getContrastText(palette.text.disabled)} formatter={labelFormatter} />
+          <LabelList dataKey="attacks" position="insideTopRight" offset={5} fill={palette.getContrastText(palette.text.disabled)} formatter={labelFormatter} />
         </Bar>
         {/*<Area type="monotone" dataKey="attacks" fill={palette.text.disabled} />*/}
-        <Line dataKey="drug_fans" stroke={palette.info.main} strokeWidth={3} />
-        <Line dataKey="drug_fans_strong" stroke={palette.warning.main} strokeWidth={3} />
-        <Line dataKey="drug_triptan" stroke={palette.error.main} strokeWidth={3} />
 
         <ReferenceLine
           x="2024-05"
@@ -82,9 +79,13 @@ export const Migrane_Attacks = () => {
             fill: palette.text.primary,
             angle: -90,
           }}
-          strokeWidth={3}
-          strokeDasharray={10}
+          strokeWidth={5}
+          strokeDasharray="15 5"
         />
+
+        <Line dataKey="drug_fans" stroke={palette.info.main} strokeWidth={3} />
+        <Line dataKey="drug_fans_strong" stroke={palette.warning.main} strokeWidth={3} />
+        <Line dataKey="drug_triptan" stroke={palette.error.main} strokeWidth={3} />
       </ComposedChart>
     </ResponsiveContainer>
   )
