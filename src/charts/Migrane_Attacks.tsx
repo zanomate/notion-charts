@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { Bar, CartesianGrid, ComposedChart, Label, LabelList, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+import { Bar, CartesianGrid, ComposedChart, Label, LabelList, Legend, Line, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 import { Loader } from '../components/Loader.tsx'
 import { Drug } from '../types/Drug.ts'
 import { labelFormatter } from '../utils/recharts.ts'
@@ -36,15 +36,16 @@ export const Migrane_Attacks = () => {
           }
           res[month].attacks++
           // @ts-ignore
-          i.properties.Drugs.multi_select.forEach((d) => {
-            if ([Drug.OKI].includes(d.name)) res[month].drug_fans++
-            if ([Drug.INDOXEN, Drug.DIFMETRE].includes(d.name)) res[month].drug_fans_strong++
-            if ([Drug.ALMOGRAN, Drug.RELPAX_1, Drug.RELPAX_2].includes(d.name)) res[month].drug_triptan++
-            if (d.name === Drug.RELPAX_05) res[month].drug_triptan += 0.5
-            if ([Drug.TACHIPIRINA].includes(d.name)) res[month].drug_other++
+          const drugs = i.properties.Drugs.multi_select.map((d) => d.name) as Drugs[]
+          drugs.forEach((drug) => {
+            if ([Drug.OKI].includes(drug as Drug)) res[month].drug_fans++
+            if ([Drug.INDOXEN, Drug.DIFMETRE].includes(drug as Drug)) res[month].drug_fans_strong++
+            if ([Drug.ALMOGRAN, Drug.RELPAX_1, Drug.RELPAX_2].includes(drug as Drug)) res[month].drug_triptan++
+            if (drug === Drug.RELPAX_05) res[month].drug_triptan += 0.5
+            if ([Drug.TACHIPIRINA].includes(drug as Drug)) res[month].drug_other++
           })
         })
-        return Object.values(res)
+        return Object.values(res).sort((a, b) => a.month.localeCompare(b.month))
       },
     },
   )
@@ -56,15 +57,31 @@ export const Migrane_Attacks = () => {
       <ComposedChart margin={{ top: 48, left: 48, right: 48, bottom: 48 }} data={data}>
         <Legend verticalAlign="top" height={36} />
         <CartesianGrid />
-        <XAxis dataKey="season">
-          <Label value="TTme" offset={-5} position="insideBottom" />
-        </XAxis>
-        <YAxis ticks={[24]}>
+        <XAxis dataKey="month" tickFormatter={(val) => moment(val, 'YYYY-MM').format('MMM YY')} />
+        <YAxis ticks={[5, 10, 15]}>
           <Label value="Attacks and Drugs" offset={10} position="middle" angle={-90} />
         </YAxis>
-        <Bar dataKey="attacks" fill="#1ea853">
-          <LabelList dataKey="attacks" position="inside" fill="white" formatter={labelFormatter} />
+        <Bar dataKey="attacks" fill="#ddd">
+          <LabelList dataKey="attacks" position="insideTop" offset={10} fill="black" formatter={labelFormatter} />
         </Bar>
+        {/*<Area type="monotone" dataKey="attacks" fill="#aaa" />*/}
+        <Line dataKey="drug_fans" stroke="#2ee067" strokeWidth={3} />
+        <Line dataKey="drug_fans_strong" stroke="#ffd000" strokeWidth={3} />
+        <Line dataKey="drug_triptan" stroke="#fa727c" strokeWidth={3} />
+
+        <ReferenceLine
+          x="2024-05"
+          stroke="purple"
+          label={{
+            position: 'insideTopRight',
+            offset: 20,
+            value: 'Terapia monoclonale',
+            fill: '#000',
+            angle: -90,
+          }}
+          strokeWidth={3}
+          strokeDasharray={5}
+        />
       </ComposedChart>
     </ResponsiveContainer>
   )
