@@ -65,7 +65,7 @@ export const Migrane_Attacks = () => {
           <Label value="Attacks and Drugs" offset={10} position="middle" angle={-90} />
         </YAxis>
         <Bar dataKey="attacks" fill={palette.text.disabled}>
-          <LabelList dataKey="attacks" position="insideTop" offset={10} fill={palette.text.primary} formatter={labelFormatter} />
+          <LabelList dataKey="attacks" position="insideTop" offset={10} fill={palette.getContrastText(palette.text.disabled)} formatter={labelFormatter} />
         </Bar>
         {/*<Area type="monotone" dataKey="attacks" fill={palette.text.disabled} />*/}
         <Line dataKey="drug_fans" stroke={palette.info.main} strokeWidth={3} />
@@ -74,7 +74,7 @@ export const Migrane_Attacks = () => {
 
         <ReferenceLine
           x="2024-05"
-          stroke="purple"
+          stroke={palette.primary.main}
           label={{
             position: 'insideTopRight',
             offset: 20,
@@ -83,7 +83,7 @@ export const Migrane_Attacks = () => {
             angle: -90,
           }}
           strokeWidth={3}
-          strokeDasharray={5}
+          strokeDasharray={10}
         />
       </ComposedChart>
     </ResponsiveContainer>
