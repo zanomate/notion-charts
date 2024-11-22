@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material'
 import moment from 'moment'
 import { Bar, CartesianGrid, ComposedChart, Label, LabelList, Legend, Line, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 import { Loader } from '../components/Loader.tsx'
@@ -15,6 +16,8 @@ interface ChartItem {
 }
 
 export const Migrane_Attacks = () => {
+  const { palette } = useTheme()
+
   const { isFetching, data } = useDatabase<ChartItem>(
     process.env.PUBLIC_MIGRANE_DB_ID as string,
     {},
@@ -61,13 +64,13 @@ export const Migrane_Attacks = () => {
         <YAxis ticks={[5, 10, 15]}>
           <Label value="Attacks and Drugs" offset={10} position="middle" angle={-90} />
         </YAxis>
-        <Bar dataKey="attacks" fill="#ddd">
-          <LabelList dataKey="attacks" position="insideTop" offset={10} fill="black" formatter={labelFormatter} />
+        <Bar dataKey="attacks" fill={palette.text.disabled}>
+          <LabelList dataKey="attacks" position="insideTop" offset={10} fill={palette.text.primary} formatter={labelFormatter} />
         </Bar>
-        {/*<Area type="monotone" dataKey="attacks" fill="#aaa" />*/}
-        <Line dataKey="drug_fans" stroke="#2ee067" strokeWidth={3} />
-        <Line dataKey="drug_fans_strong" stroke="#ffd000" strokeWidth={3} />
-        <Line dataKey="drug_triptan" stroke="#fa727c" strokeWidth={3} />
+        {/*<Area type="monotone" dataKey="attacks" fill={palette.text.disabled} />*/}
+        <Line dataKey="drug_fans" stroke={palette.info.main} strokeWidth={3} />
+        <Line dataKey="drug_fans_strong" stroke={palette.warning.main} strokeWidth={3} />
+        <Line dataKey="drug_triptan" stroke={palette.error.main} strokeWidth={3} />
 
         <ReferenceLine
           x="2024-05"
@@ -76,7 +79,7 @@ export const Migrane_Attacks = () => {
             position: 'insideTopRight',
             offset: 20,
             value: 'Terapia monoclonale',
-            fill: '#000',
+            fill: palette.text.primary,
             angle: -90,
           }}
           strokeWidth={3}
