@@ -1,4 +1,5 @@
 import moment from 'moment/moment'
+import { ChartItem } from '../charts/Migrane_Attacks.tsx'
 import { Drug } from '../types/Drug.ts'
 
 const data = [

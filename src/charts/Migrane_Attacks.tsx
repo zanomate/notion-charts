@@ -6,7 +6,7 @@ import { Drug } from '../types/Drug.ts'
 import { labelFormatter } from '../utils/recharts.ts'
 import { useDatabase } from '../utils/useDatabase.ts'
 
-interface ChartItem {
+export interface ChartItem {
   month: string // YYYY-MM
   attacks: number
   drug_fans: number // oki
@@ -75,7 +75,7 @@ export const Migrane_Attacks = () => {
           label={{
             position: 'insideTopRight',
             offset: 20,
-            value: 'Terapia monoclonale',
+            value: 'mAb therapy',
             fill: palette.text.primary,
             angle: -90,
           }}

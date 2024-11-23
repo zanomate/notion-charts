@@ -2,20 +2,13 @@ import { ThemeProvider } from '@mui/material'
 import { QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { CHARTS } from './charts/charts.tsx'
-import { Links } from './components/Links.tsx'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import './index.css'
+import { CHARTS } from './charts/charts.tsx'
+import { ChartsLinks } from './components/ChartsLinks.tsx'
+import { ModeLayout } from './components/ModeLayout.tsx'
 import { theme } from './config/mui.ts'
 import { queryClient } from './config/react-query.ts'
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Links />,
-  },
-  ...CHARTS,
-])
 
 const rootEl = document.getElementById('root')
 if (rootEl) {
@@ -24,7 +17,16 @@ if (rootEl) {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-          <RouterProvider router={router} />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" index element={<ChartsLinks />} />
+              <Route path="/:mode" element={<ModeLayout />}>
+                {CHARTS.map(({ path, element }) => (
+                  <Route key={path} path={path} element={element} />
+                ))}
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </ThemeProvider>
       </QueryClientProvider>
     </React.StrictMode>,

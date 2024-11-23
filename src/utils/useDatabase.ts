@@ -7,7 +7,7 @@ export const useDatabase = <CHART_ITEM>(
   options: Partial<UseQueryOptions<QueryDatabaseResponse['results'], unknown, CHART_ITEM[]>>,
 ) => {
   return useQuery({
-    queryKey: [id, JSON.stringify(args)],
+    queryKey: ['database', id, JSON.stringify(args)],
     queryFn: () =>
       fetch('/.netlify/functions/getDatabase', {
         method: 'POST',
