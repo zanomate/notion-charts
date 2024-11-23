@@ -1,10 +1,6 @@
-import { APIResponseError, Client, iteratePaginatedAPI } from '@notionhq/client'
+import { APIResponseError, iteratePaginatedAPI } from '@notionhq/client'
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
-
-const notion = new Client({
-  baseUrl: 'https://api.notion.com',
-  auth: process.env.PUBLIC_NOTION_TOKEN,
-})
+import { notion } from '../utils/client.mjs'
 
 export default async (req: Request) => {
   try {
